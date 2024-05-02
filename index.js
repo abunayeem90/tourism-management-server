@@ -84,12 +84,7 @@ async function run() {
 
     
 
-    app.get('/addSpot-email/:userEmail', async(req, res) => {
-      const userEmail = req.params.userEmail;
-      const cursor = touristSpotCollection.find({userEmail});
-      const user = await cursor.toArray();
-      res.send(user);
-    })
+   
 
     app.get('/addSpot/:id', async(req, res) => {
       const id = req.params.id;
