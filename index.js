@@ -32,6 +32,7 @@ async function run() {
 
     const touristSpotCollection = client.db('touristSpotDB').collection('touristSpot');
     const userCollection = client.db('touristSpotDB').collection('user');
+    const countryCollection = client.db('touristSpotDB').collection('country_Name');
 
 
     app.get('/addSpot', async (req, res) => {
@@ -52,11 +53,7 @@ async function run() {
 
     // user related api
 
-    app.get('/user', async (req, res) => {
-      const cursor = userCollection.find();
-      const user = await cursor.toArray();
-      res.send(user);
-    })
+    
 
     app.post('/user', async (req, res) => {
       const user = req.body;
@@ -65,7 +62,17 @@ async function run() {
       res.send(result);
     });
 
-    // API endpoints
+    
+    app.get('/user', async (req, res) => {
+      const cursor = userCollection.find();
+      const user = await cursor.toArray();
+      res.send(user);
+    })
+
+
+
+
+
     app.post('/addSpot', (req, res) => {
       const newItem = new Item({
         userId: req.user._id,
@@ -123,7 +130,14 @@ async function run() {
       res.send(result);
     })
 
-    
+    app.delete('/addSpot/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await touristSpotCollection.deleteOne(query);
+      res.send(result);
+
+
+    })
 
 
     // Send a ping to confirm a successful connection
