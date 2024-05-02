@@ -1,19 +1,13 @@
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
-
 require('dotenv').config();
 const cors = require('cors');
 const app = express();
 
 const port = process.env.PORT || 5000;
 
-// middleware
-app.use(cors(
-  {
-    origin: ["http://localhost:5173", ""],
-    credentials: true,
-  }
-));
+
+app.use(cors());
 app.use(express.json());
 
 
@@ -34,7 +28,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const touristSpotCollection = client.db('touristSpotDB').collection('touristSpot');
     const userCollection = client.db('touristSpotDB').collection('user');
@@ -140,7 +134,7 @@ async function run() {
 
 
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
@@ -150,22 +144,8 @@ async function run() {
 run().catch(console.dir);
 
 
-
-
-
-
-
-
-
-
-// middleware
-app.use(cors());
-
-app.use(express.json());
-
 app.get('/', (req, res) => {
-  res.send('tourism managment server is runnig ')
-
+  res.send('tourism managment server is runnig ');
 
 })
 
