@@ -53,7 +53,18 @@ async function run() {
 
     // user related api
 
-    
+    app.get('/country_Name', async (req, res) => {
+      const cursor = countryCollection.find();
+      const country = await cursor.toArray();
+      res.send(country);
+    })
+
+    app.post('/country_Name', async (req, res) => {
+      const country = req.body;
+      console.log(country);
+      const result = await countryCollection.insertOne(country);
+      res.send(result);
+    });
 
     app.post('/user', async (req, res) => {
       const user = req.body;
