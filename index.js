@@ -78,7 +78,6 @@ async function run() {
       const query = {_id: new ObjectId(id)}
       const result = await touristSpotCollection.findOne(query);
       res.send(result);
-
     })
 
     app.get('/countries/Thailand/:id', async(req, res) => {
@@ -86,7 +85,6 @@ async function run() {
       const query = {_id: new ObjectId(id)}
       const result = await touristSpotCollection.findOne(query);
       res.send(result);
-
     })
 
     app.get('/countries/Indonesia/:id', async(req, res) => {
@@ -94,7 +92,6 @@ async function run() {
       const query = {_id: new ObjectId(id)}
       const result = await touristSpotCollection.findOne(query);
       res.send(result);
-
     })
 
     app.get('/countries/Malaysia/:id', async(req, res) => {
