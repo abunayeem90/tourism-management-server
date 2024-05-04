@@ -32,7 +32,7 @@ async function run() {
 
     const touristSpotCollection = client.db('touristSpotDB').collection('touristSpot');
     const userCollection = client.db('touristSpotDB').collection('user');
-    const countryCollection = client.db('touristSpotDB').collection('country_Name');
+    const countryCollection = client.db('touristSpotDB').collection('country');
 
 
     app.get('/addSpot', async (req, res) => {
@@ -51,20 +51,78 @@ async function run() {
       res.send(result);
     })
 
-    // user related api
+    
 
-    app.get('/country_Name', async (req, res) => {
+    app.get('/countries', async (req, res) => {
       const cursor = countryCollection.find();
-      const country = await cursor.toArray();
-      res.send(country);
+      const countries = await cursor.toArray();
+      res.send(countries);
     })
 
-    app.post('/country_Name', async (req, res) => {
+    app.post('/countries', async (req, res) => {
       const country = req.body;
       console.log(country);
       const result = await countryCollection.insertOne(country);
       res.send(result);
     });
+
+    app.get('/countries/:countryName', async(req, res) => {
+      const countryName = req.params.countryName;
+      const cursor = touristSpotCollection.find({countryName});
+      const user = await cursor.toArray();
+      res.send(user);
+    })
+    
+    app.get('/countries/Bangladesh/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await touristSpotCollection.findOne(query);
+      res.send(result);
+
+    })
+
+    app.get('/countries/Thailand/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await touristSpotCollection.findOne(query);
+      res.send(result);
+
+    })
+
+    app.get('/countries/Indonesia/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await touristSpotCollection.findOne(query);
+      res.send(result);
+
+    })
+
+    app.get('/countries/Malaysia/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await touristSpotCollection.findOne(query);
+      res.send(result);
+
+    })
+
+    app.get('/countries/Vietnam/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await touristSpotCollection.findOne(query);
+      res.send(result);
+
+    })
+
+    app.get('/countries/Cambodia/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await touristSpotCollection.findOne(query);
+      res.send(result);
+
+    })
+
+
+    // user related api
 
     app.post('/user', async (req, res) => {
       const user = req.body;
